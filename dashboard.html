@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SIPILAH — Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page dashboard light">
+  <header class="app-top">
+    <div class="left">
+      <img src="assets/logo.svg" class="mini-logo" alt="logo">
+      <div class="brand"><strong>SIPILAH</strong><span class="muted"> • Dashboard</span></div>
+    </div>
+    <div class="right">
+      <button id="btnTheme" class="icon-btn" aria-label="Toggle theme">🌓</button>
+      <a href="notifications.html" class="icon-btn">🔔</a>
+      <a href="profile.html" class="icon-btn">👤</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card overview card-animated">
+      <div class="row between">
+        <div><h4 class="muted small">Total bins</h4><div class="stat" id="totalBins">0</div></div>
+        <div><h4 class="muted small">Average fill</h4><div class="stat" id="avgFill">0%</div></div>
+        <div><h4 class="muted small">Alerts</h4><div class="stat" id="alertsCount">0</div></div>
+      </div>
+    </section>
+
+    <section class="card card-animated">
+      <h4 style="margin-bottom:8px">♻️ Kenali Konsep 3R</h4>
+      <p class="muted small" style="line-height:1.7">
+        Reduce, Reuse, Recycle — tiga prinsip dasar pengelolaan sampah untuk menjaga lingkungan tetap bersih dan berkelanjutan.
+      </p>
+      <div id="eduDetail" style="margin-top:12px">
+        <div style="margin-bottom:12px">
+          <div style="font-weight:700">♻️ Reduce</div>
+          <p class="muted small" style="line-height:1.7;margin-top:4px">Reduce merupakan upaya mengurangi penggunaan barang sekali pakai untuk meminimalkan jumlah sampah yang dihasilkan. Langkah sederhana yang dilakukan seperti membawa tumbler, menggunakan tas belanja kain, dan mengurangi penggunaan plastik dapat membantu menjaga lingkungan tetap bersih.</p>
+        </div>
+        <div style="margin-bottom:12px">
+          <div style="font-weight:700">🔄 Reuse</div>
+          <p class="muted small" style="line-height:1.7;margin-top:4px">Reuse adalah menggunakan kembali barang yang masih layak pakai agar tidak langsung menjadi limbah. Contohnya seperti memakai ulang botol minum, memanfaatkan kardus bekas, atau menggunakan wadah makan berkali-kali.</p>
+        </div>
+        <div style="margin-bottom:12px">
+          <div style="font-weight:700">🌱 Recycle</div>
+          <p class="muted small" style="line-height:1.7;margin-top:4px">Recycle merupakan proses mendaur ulang sampah menjadi barang yang lebih bermanfaat dan bernilai guna. Sampah seperti botol plastik, kertas, atau sampah organik dapat diolah kembali menjadi kerajinan, ecobrick, maupun kompos.</p>
+        </div>
+        <div style="margin-bottom:12px">
+          <div style="font-weight:700">🚮 Dampak Sampah</div>
+          <p class="muted small" style="line-height:1.7;margin-top:4px">Penumpukan sampah yang tidak dikelola dengan baik dapat menyebabkan pencemaran lingkungan, banjir, bau tidak sedap, serta meningkatkan risiko penyakit di masyarakat. Selain itu, sampah juga memberikan dampak terhadap masalah kesehatan seperti Diare dan D BD</p>
+        </div>
+        <div>
+          <div style="font-weight:700">💡 Tips Peduli Lingkungan</div>
+          <p class="muted small" style="line-height:1.7;margin-top:4px">Mulailah dari kebiasaan kecil seperti membuang sampah pada tempatnya, memilah sampah organik dan anorganik, serta mengurangi penggunaan plastik sekali pakai untuk menciptakan lingkungan yang lebih sehat dan bersih.</p>
+        </div>
+      </div>
+      <button onclick="toggleEdu()" id="btnEdu" class="btn ghost" style="margin-top:12px">Baca Selengkapnya</button>
+    </section>
+
+    <section class="card card-animated">
+      <div class="row between">
+        <h3>All bins</h3>
+        <div class="controls">
+          <button id="refreshBtn" class="btn ghost">Refresh</button>
+          <a href="map.html" class="btn ghost">Open map</a>
+        </div>
+      </div>
+      <div id="binsGrid" class="grid bins-grid"></div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="dashboard.html" class="nav-item active">Home</a>
+    <a href="history.html" class="nav-item">History</a>
+    <a href="map.html" class="nav-item">Map</a>
+    <a href="notifications.html" class="nav-item">Alerts</a>
+    <a href="profile.html" class="nav-item">Profile</a>
+  </nav>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    function toggleEdu(){
+      const detail = document.getElementById('eduDetail');
+      const btn = document.getElementById('btnEdu');
+    
+      detail.classList.toggle('show');
+    
+      if(detail.classList.contains('show')){
+        btn.textContent = 'Tutup';
+      } else {
+        btn.textContent = 'Baca Selengkapnya';
+      }
+    }
+    </script>
+</body>
+</html>

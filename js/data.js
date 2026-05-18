@@ -1,0 +1,40 @@
+(function(){
+  window.bins = [
+    { id:1, name:'Cafeteria',      volume:76, temp:28, lat:-7.9528,  lng:112.6145, lid:true,  auto:true,  organic:55, inorganic:35, b3:10, history:[] },
+    { id:2, name:'Main Parking',   volume:22, temp:26, lat:-7.9560,  lng:112.6216, lid:false, auto:true,  organic:30, inorganic:50, b3:20, history:[] },
+    { id:3, name:'Graha Rektorat', volume:81, temp:21, lat:-7.95550, lng:112.6180, lid:true,  auto:false, organic:60, inorganic:30, b3:10, history:[] },
+    { id:4, name:'Ged. A-19-A-20', volume:52, temp:16, lat:-7.95320, lng:112.7180, lid:true,  auto:false, organic:40, inorganic:45, b3:15, history:[] },
+    { id:5, name:'Central Park',   volume:98, temp:31, lat:-7.9500,  lng:112.6190, lid:true,  auto:false, organic:50, inorganic:35, b3:15, history:[] }
+  ];
+
+  const days=30; const now=Date.now();
+  window.bins.forEach(b=>{
+    b.history=[];
+    for(let i=days-1;i>=0;i--){
+      const d=new Date(now - i*24*60*60*1000);
+      b.history.push({date:d.toISOString().slice(0,10), volume: Math.max(0, Math.min(100, b.volume + Math.round((Math.random()*20)-10))) });
+    }
+  });
+
+  window.sbaSubscribers=[];
+  window.sbaSubscribe = fn=> window.sbaSubscribers.push(fn);
+  window.sbaPublish = ()=> window.sbaSubscribers.forEach(fn=>{ try{ fn(window.bins) }catch(e){console.error(e)} });
+
+  window.sbaInterval = setInterval(()=>{
+    window.bins = window.bins.map(b=>{
+      const drift = b.auto ? (Math.random()*4) : (Math.random()*2-1);
+      const newVol = Math.round(Math.max(0, Math.min(100, b.volume + drift)));
+      const newTemp = Math.round(Math.max(10, Math.min(60, b.temp + (Math.random()*2-1))));
+      const today = new Date().toISOString().slice(0,10);
+      const history = b.history.slice();
+      if(!history.length || history[history.length-1].date !== today){
+        history.push({date: today, volume: newVol});
+        if(history.length>90) history.shift();
+      } else {
+        history[history.length-1].volume = newVol;
+      }
+      return Object.assign({}, b, { volume: newVol, temp: newTemp, history });
+    });
+    window.sbaPublish();
+  },5000);
+})();

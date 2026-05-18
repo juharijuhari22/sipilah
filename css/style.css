@@ -163,19 +163,21 @@ html, body{
 }
 
 .splash-slogan{
-  margin-top: 12px;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 700;
-  text-align: center;
-  line-height: 1.6;
-  max-width: 420px;
+  margin-left: 16px;
 
   background: linear-gradient(90deg, #15a3ff, #3bd07c);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  animation: fadeGlow 1.2s ease;
-  text-shadow: 0 0 18px rgba(21,163,255,0.25);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+.left{
+  display: flex;
+  align-items: center;
 }
 
 @keyframes fadeGlow{
